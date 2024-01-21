@@ -2,19 +2,19 @@
 
 ![Project Preview](./image/_DSC7089.jpg)
 
-A wifi sniffer. Find out who is talking in your Wifi(ethernet), display their MAC addresses in a binary form on a LED Matrix. **Retro style!**
+A WiFi sniffer that identifies devices communicating on your network (Ethernet) and displays their MAC addresses in binary form on an LED Matrix, giving it a retro style.
 
 ## Hardware
 
-### What you should prepare
+### Prerequisites
 
-- Raspberry Pi (for me it's a 3B, so anything later than 3B should probably work)
+- Raspberry Pi (3B or later)
 
-- LED matrix driven by MAX7219. You should buy at least 4 8*8 matrix modules. I bought a module contains 4 matrices on a single board for CNY 17.6
+- LED matrix driven by MAX7219. It is recommended to use at least 4 8x8 matrix modules. A module containing 4 matrices on a single board is recommended and costs around CNY 17.6.
 
-- level shifter(optional. Developers of luma.led_matrix recommend adding this between your raspberry pi GPIO and LED module for a good reason. I did't use this but it works without problem.)
+- Level shifter (optional). Although not required, it is recommended by the developers of luma.led_matrix to add a level shifter between your Raspberry Pi GPIO and LED module for better performance.
 
-- wire, power supply, etc.
+- Wires, power supply, etc.
 
 ### Wiring
 
@@ -26,39 +26,39 @@ A wifi sniffer. Find out who is talking in your Wifi(ethernet), display their MA
 | 4         | CS   | Chip Select | 24      | GPIO 8(SPI CE0)  |
 | 5         | CLK  | Clock       | 23      | GPIO 11(SPI CLK) |
 
-I copied this table from [luma.led_matrix documentation](https://luma-led-matrix.readthedocs.io/en/latest/install.html#max7219-devices-spi). It works for me.
+The above table is copied from the [luma.led_matrix documentation](https://luma-led-matrix.readthedocs.io/en/latest/install.html#max7219-devices-spi) and it should work for most setups.
 
 ## Software
 
-After configure all the hardware stuff mentioned in /Hardware/README.md, it's time to actually run this lovely toy!
+After configuring all the hardware components, it's time to run this exciting project!
 
-To run this script, you should first install Python3 and pip in your Raspberry Pi(for me it's a Pi 3B).
+To run this script, you need to first install Python 3 and pip on your Raspberry Pi (in my case, it's a Pi 3B).
 
 ```bash
 sudo apt update
 sudo apt install python3 python3-pip
 ```
 
-Then install scapy and luma.led_matrix. You can install them from pip.
+Next, install Scapy and luma.led_matrix. You can install them using pip.
 
 ```bash
-# You can use either this
+# You can use either of the following commands
 pip install -r requirements.txt
-# or this
+# or
 sudo pip install luma.led-matrix
 sudo pip install scapy
-# I personally love the first one most.
+# I personally prefer the first option.
 ```
 
-After installation of python related stuff, you should turn on SPI interface in raspi-config by this command:
+After installing the required Python packages, enable the SPI interface in `raspi-config` using the following command:
 
 ```bash
 sudo raspi-config
 ```
 
-In the Interface sub manuel, you should find SPI. Turn it on, then reboot. You can probably do this step in GUI, but I love when someone write a useable TUI.
+In the `Interface` submenu, find the `SPI` option and turn it on. Then, reboot your Raspberry Pi. You can also perform this step in the GUI, but I find the command-line interface more convenient.
 
-After all this, you can probably run this script by this command:
+Finally, you can run the script with the following command:
 
 ```bash
 sudo python3 ./main.py
