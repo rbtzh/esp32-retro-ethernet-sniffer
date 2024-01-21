@@ -1,0 +1,2 @@
+luma.led_matrix == 1.7.1
+scapy == 2.5.0
